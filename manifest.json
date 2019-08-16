@@ -1,0 +1,7 @@
+{
+  "name": "Anchor Resizer",
+  "id": "740887843052935394",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html"
+}

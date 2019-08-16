@@ -1,0 +1,27 @@
+{
+  "scripts": {
+    "watch": "webpack --mode=development --watch",
+    "build": "webpack --mode=production"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.24",
+    "@types/react-dom": "^16.8.5",
+    "css-loader": "^3.1.0",
+    "html-webpack-inline-source-plugin": "^0.0.10",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "url-loader": "^2.1.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "fuzzy-search": "^3.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "license": "MIT"
+}
