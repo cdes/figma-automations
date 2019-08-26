@@ -1,15 +1,19 @@
 {
   "scripts": {
     "watch": "webpack --mode=development --watch",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "lint:fix": "eslint './src/**/*.{ts,tsx,js}'"
   },
   "devDependencies": {
-    "@types/react": "^16.8.24",
+    "@types/react": "^16.9.2",
+    "@types/react-beautiful-dnd": "^11.0.3",
     "@types/react-dom": "^16.8.5",
+    "@types/styled-components": "^4.1.18",
     "css-loader": "^3.1.0",
     "html-webpack-inline-source-plugin": "^0.0.10",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.12.0",
+    "prettier": "^1.18.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-loader": "^6.0.4",
@@ -19,9 +23,13 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
-    "fuzzy-search": "^3.0.1",
+    "@atlaskit/css-reset": "^5.0.6",
+    "@mdi/js": "^4.1.95",
+    "@mdi/react": "^1.2.1",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-beautiful-dnd": "^11.0.5",
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.3.2"
   },
   "license": "MIT"
 }

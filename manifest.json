@@ -1,6 +1,6 @@
 {
-  "name": "Anchor Resizer",
-  "id": "740887843052935394",
+  "name": "Automations",
+  "id": "740887843052935395",
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html"
