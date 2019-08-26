@@ -18,3 +18,4 @@
 - [ ] Docs & Tutorial
 - [ ] Tutorial inside the plugin UI
 - [ ] Step by step playback
+- [ ] Eslint & tests 🤷🏻‍♂️
