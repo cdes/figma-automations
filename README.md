@@ -13,4 +13,8 @@
 - [ ] More automation info: creator name and icon
 - [ ] Browse/open saved automations
 - [ ] Sharable automations (serialized arrays? encoded?)
-- [ ] Step by step playback.
+- [ ] Prebuilt automations
+- [ ] Readme
+- [ ] Docs & Tutorial
+- [ ] Tutorial inside the plugin UI
+- [ ] Step by step playback
