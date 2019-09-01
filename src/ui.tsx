@@ -3,9 +3,8 @@ import * as ReactDOM from 'react-dom';
 import { DragDropContext } from 'react-beautiful-dnd';
 import "@atlaskit/css-reset";
 
-import { html as io } from './lib/io';
-import useSelection from './hooks/use-selection';
-import actionsData from './lib/actions-data';
+import { html as io } from './io';
+import actions from './actions';
 
 import Action from './components/action';
 import ActionButton from './components/action-button';
@@ -18,35 +17,57 @@ import NavButton from './components/nav-button';
 import Icon from '@mdi/react';
 import { mdiPlay, mdiCheck } from '@mdi/js';
 
-const { useState, useEffect } = React;
+const { useState, useReducer, useCallback } = React;
 
-const PluginUI = () => {
-  const [automation, setAutomation] = useState(actionsData.automation);
-  const { actions } = actionsData;
-  const actionsArray = Object.keys(actions).map(actionId => actions[actionId]);
+import { v4 as uuid } from 'uuid';
+import * as randomcolor from "randomcolor";
 
-  const selection = useSelection();
+import reducer from "./reducer";
 
-  const { length } = selection;
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
 
+  return result;
+};
 
-  const onDragEnd = (result) => {
-    // const { destination, source, draggableId  } = result;
+const PluginUI: React.FC = () => {
+  const [automation, setAutomation] = useState([]);
 
-    // if(!destination) {
-    //   return;
-    // }
+  const [store, dispatch] = useReducer(reducer, {});
 
+  const onDragEnd = (result) => {    
+    const { destination, source  } = result;
+
+    // drop outside
+    if(!destination) {
+      return;
+    }
+
+    // // drop in the same position
     // if(
     //   destination.droppableId === source.droppableId &&
     //   destination.index === source.index
     // ) {
     //   return;
     // }
+
+    const items = reorder(
+      automation,
+      source.index,
+      destination.index
+    );
+
+    setAutomation(items);
   }
 
-  const addAction = (action) => () => {
-    setAutomation([...automation, action.id]);
+  const addAction = (action) => () => {    
+    setAutomation([...automation, {
+      id: uuid(),
+      action,
+      color: randomcolor({ luminosity: 'dark' })
+    }]);
   }
 
   const runAutomation = () => {
@@ -66,15 +87,15 @@ const PluginUI = () => {
       <App>
         <DragDropContext onDragEnd={onDragEnd}>
           <Automation>
-            {automation.map((id, index) => (
-              <Action key={`${id}-${index}`} actionId={id} index={index}>
-                {actions[id].name} id: {id} ix: {index}
+            {automation.map((ActionObject, index) => (
+              <Action key={ActionObject.id} index={index} draggableId={ActionObject.id}>
+                <ActionObject.action id={ActionObject.id} dispatch={dispatch} index={index} color={ActionObject.color} />
               </Action>
             ))}
           </Automation>
           <ActionsList>
-            {actionsArray.map(action => (
-              <ActionButton key={action.id} onClick={addAction(action)}>
+            {actions.map(action => (
+              <ActionButton key={action.name} onClick={addAction(action)}>
                 {action.name}
               </ActionButton>
             ))}

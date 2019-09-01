@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { html as io } from '../lib/io.js';
+import { html as io } from '../io.js';
 
 const { useState, useEffect } = React;
 

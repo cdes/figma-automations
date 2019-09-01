@@ -1,15 +1,12 @@
-import { script as io } from './lib/io.js';
-import actionsData from './lib/actions-data';
-
-const { actions } = actionsData;
+import { script as io } from './io';
 
 figma.showUI(__html__, {
   width: 504,
-  height: 400,
+  height: 640,
 });
 
 io.on("run", (automation) => {
-  automation.map((id => actions[id].run()));
+  // automation
 });
 
 setInterval(() => {

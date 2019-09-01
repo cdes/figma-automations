@@ -12,6 +12,7 @@ const Container = styled.div`
   overflow-y: scroll;
   margin-top: 40px;
   min-height: calc(100% - 40px);
+  padding: 8px 0;
 `;
 
 const Automation = ({ children }) => {
@@ -28,6 +29,7 @@ const Automation = ({ children }) => {
         {provided => (
           <Container {...provided.droppableProps} ref={provided.innerRef}>
             {children}
+            {provided.placeholder}
           </Container>
         )}
       </Droppable>
