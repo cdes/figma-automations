@@ -20,9 +20,9 @@ import { mdiPlay, mdiCheck } from '@mdi/js';
 const { useState, useReducer, useCallback } = React;
 
 import { v4 as uuid } from 'uuid';
-import * as randomcolor from "randomcolor";
+import * as randomcolor from "random-color";
 
-import reducer from "./reducer";
+import { reducer, Context } from "./store";
 
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
@@ -35,7 +35,7 @@ const reorder = (list, startIndex, endIndex) => {
 const PluginUI: React.FC = () => {
   const [automation, setAutomation] = useState([]);
 
-  const [store, dispatch] = useReducer(reducer, {});
+  const [store, dispatch] = useReducer(reducer, {});  
 
   const onDragEnd = (result) => {    
     const { destination, source  } = result;
@@ -62,11 +62,11 @@ const PluginUI: React.FC = () => {
     setAutomation(items);
   }
 
-  const addAction = (action) => () => {    
+  const addAction = (action) => () => {        
     setAutomation([...automation, {
       id: uuid(),
       action,
-      color: randomcolor({ luminosity: 'dark' })
+      color: randomcolor(0.3, 0.7).hexString()
     }]);
   }
 
@@ -75,7 +75,7 @@ const PluginUI: React.FC = () => {
   }
 
   return (
-    <div>
+    <Context.Provider value={{ store, dispatch }}>
       <Nav>
         <NavButton onClick={runAutomation}>
           <Icon size={1} path={mdiPlay} color="white" />
@@ -96,13 +96,13 @@ const PluginUI: React.FC = () => {
           <ActionsList>
             {actions.map(action => (
               <ActionButton key={action.name} onClick={addAction(action)}>
-                {action.name}
+                {action.name.replace(/([A-Z])/g, ' $1').trim()}
               </ActionButton>
             ))}
           </ActionsList>
         </DragDropContext>
       </App>
-    </div>
+    </Context.Provider>
   );
 }
 

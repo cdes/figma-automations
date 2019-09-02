@@ -12,7 +12,8 @@ const Container = styled.div`
   overflow-y: scroll;
   margin-top: 40px;
   min-height: calc(100% - 40px);
-  padding: 8px 0;
+  padding: 0 0 16px;
+  box-sizing: border-box;
 `;
 
 const Automation = ({ children }) => {

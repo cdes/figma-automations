@@ -4,10 +4,7 @@ import styled from "styled-components";
 const Container = styled.div`
   background: #F3F5F8;
   padding: 8px;
-  font-style: normal;
-  font-weight: normal;
   font-size: 12px;
-  line-height: 15px;
   color: #383838;
   display: flex;
   flex-direction: row;
