@@ -4,6 +4,8 @@ import { Field, Label, Input, Footer, Output } from '../components'
 import { Context } from '../store';
 const { useState, useEffect, useContext } = React;
 import isUUID from 'validator/lib/isUUID';
+import { NUMBER } from "./output-types";
+import { getSupportedOptions } from "./helper-functions";
 
 function RandomNumber({ id, index, color }) {
   const { store, dispatch } = useContext(Context);
@@ -17,7 +19,8 @@ function RandomNumber({ id, index, color }) {
         state: {
           option: {
             label: `Random Number ${index+1}`,
-            value: id
+            value: id,
+            type: NUMBER
           },
           index,
           min,      
@@ -65,23 +68,16 @@ function RandomNumber({ id, index, color }) {
       setMax(parseInt(newValue));
     }
   }
-
-  function getOptions() {
-    const options = Object.keys(store).filter(key => key !== id).map(key => store[key].option);
-    console.log(options);
-    return options;
-  }
   
-
   return (
     <>
       <Field>
         <Label>Minimum</Label>
-        <Input onChange={(newValue) => setMinValue(newValue)} onInputChange={(newValue) => setMinValue(newValue)} options={getOptions()} />
+        <Input onChange={(newValue) => setMinValue(newValue)} onInputChange={(newValue) => setMinValue(newValue)} options={getSupportedOptions(store, id, NUMBER)} />
       </Field>
       <Field>
         <Label>Maximum</Label>
-        <Input onChange={(newValue) => setMaxValue(newValue)} onInputChange={(newValue) => setMaxValue(newValue)} options={getOptions()} />
+        <Input onChange={(newValue) => setMaxValue(newValue)} onInputChange={(newValue) => setMaxValue(newValue)} options={getSupportedOptions(store, id, NUMBER)} />
       </Field>
       <Footer>
         Output
